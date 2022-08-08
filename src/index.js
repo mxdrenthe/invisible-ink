@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 app.post('/echo', (req, res) => {
     const out = {
-        userID: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+        userID: req.headers['x-forwarded-for'] || req.socket.remoteAddress,
         time: Date.now()
     };
 
@@ -31,7 +31,6 @@ app.post('/echo', (req, res) => {
     }
 
     res.json(out);
-    process.exit(0);
 });
 
 app.listen(8000);
